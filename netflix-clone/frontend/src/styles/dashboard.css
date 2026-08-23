@@ -1,0 +1,184 @@
+/* =========================================
+   1. Dashboard Variables & Animations
+   ========================================= */
+:root {
+  --nx-black: #000000;
+  --nx-dark: #141414;
+  --nx-red: #e50914;
+  --nx-red-hover: #f40612;
+  --nx-white: #ffffff;
+  --nx-gray: #b3b3b3;
+  --nx-card-bg: #2a2a2a;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* =========================================
+   2. Base Dashboard Layout
+   ========================================= */
+.dashboard-page {
+  min-height: 100vh;
+  background-color: var(--nx-dark);
+  color: var(--nx-white);
+  /* Added modern fonts commonly used in premium UIs */
+  font-family: "Poppins", "Outfit", "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   3. Glassmorphic Header
+   ========================================= */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 4%;
+  position: sticky;
+  top: 0;
+  background-color: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.brand-logo {
+  color: var(--nx-red);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 0.95rem;
+  color: var(--nx-white);
+}
+
+.logout-button {
+  background-color: transparent;
+  color: var(--nx-white);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logout-button:hover {
+  background-color: var(--nx-white);
+  color: var(--nx-black);
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   4. Hero Section
+   ========================================= */
+.dashboard-hero {
+  padding: 60px 4% 20px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, var(--nx-dark) 100%);
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dashboard-hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-hero p {
+  color: var(--nx-gray);
+  font-size: 1.1rem;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   5. Content Grid (Movie Cards)
+   ========================================= */
+.dashboard-grid {
+  display: grid;
+  /* Responsive grid that auto-adjusts based on screen size */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 40px 4%;
+}
+
+.dashboard-card {
+  aspect-ratio: 2 / 3; /* Movie poster ratio */
+  background: linear-gradient(90deg, #222 25%, #333 50%, #222 75%);
+  background-size: 200% 100%;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  animation: skeletonShimmer 2.5s infinite linear; /* Cool loading shimmer effect */
+  opacity: 0;
+}
+
+/* Staggered load for cards using CSS loop-like selectors */
+.dashboard-card:nth-child(1) { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
+.dashboard-card:nth-child(2) { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
+.dashboard-card:nth-child(3) { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; }
+.dashboard-card:nth-child(4) { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+.dashboard-card:nth-child(5) { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; }
+.dashboard-card:nth-child(n+6) { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; }
+
+.dashboard-card:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.8);
+  background: var(--nx-card-bg); /* Removes shimmer on hover */
+  color: var(--nx-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* =========================================
+   6. Mobile Responsiveness
+   ========================================= */
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 16px 4%;
+  }
+  
+  .brand-logo {
+    font-size: 1.5rem;
+  }
+  
+  .user-info {
+    gap: 12px;
+  }
+  
+  .user-info span {
+    display: none; /* Hide username on small screens to save space */
+  }
+
+  .dashboard-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+    padding: 20px 4%;
+  }
+}

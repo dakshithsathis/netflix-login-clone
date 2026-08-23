@@ -1,0 +1,88 @@
+/* =========================================
+   1. Design Tokens (Variables)
+   ========================================= */
+:root {
+  /* Colors */
+  --nx-black: #000000;
+  --nx-dark: #141414;
+  --nx-red: #e50914;
+  --nx-red-hover: #f40612;
+  --nx-gray-text: #737373;
+  --nx-input-bg: #333333;
+  --nx-input-border: #8c8c8c;
+  --nx-error: #e87c03;
+  --nx-white: #ffffff;
+
+  /* Typography & Animation */
+  --font-base: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --transition-fast: 0.2s ease-in-out;
+}
+
+/* =========================================
+   2. Modern CSS Reset
+   ========================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: dark; /* Adapts native scrollbars to dark mode */
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--nx-black);
+  color: var(--nx-white);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; /* Crisp text on Firefox/Mac */
+}
+
+/* =========================================
+   3. Form Elements & Accessibility
+   ========================================= */
+button,
+input,
+textarea,
+select {
+  font: inherit; /* Forces inputs to use body font */
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: inherit;
+  transition: background-color var(--transition-fast);
+}
+
+/* Keyboard navigation focus states */
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--nx-white);
+  outline-offset: 2px;
+}
+
+/* =========================================
+   4. Browser Overrides (Autofill Fix)
+   ========================================= */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--nx-white);
+  -webkit-box-shadow: 0 0 0px 1000px #333333 inset;
+  transition: background-color 5000s ease-in-out 0s;
+  caret-color: var(--nx-white); /* Keeps typing cursor visible */
+}
